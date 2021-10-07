@@ -15,10 +15,6 @@ body {
   font-size: 36px;
 }
 
-#main i {
-  font-size: 56px;
-}
-
-#result i {
-  font-size: 32px;
+.material-icons.large {
+  font-size: 48px;
 }

@@ -29,7 +29,7 @@ let game = {
   displayResult: function() {
     const currentTime = Date.now();
     const elapsedTime = formattedSeconds(currentTime - game.startTime);
-    game.resultArea.innerHTML = `<p>${elapsedTime} 秒かかりました。</p><p><i class="material-icons">refresh</i>もう一度プレイする場合にはブラウザをリロードしてください。</p>`;
+    game.resultArea.innerHTML = `<p>${elapsedTime} 秒かかりました。</p><p><span class="material-icons">refresh</span>もう一度プレイする場合にはブラウザをリロードしてください。</p>`;
     game.isPlaying = false;
   },
   displayWord: function() {

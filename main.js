@@ -1,5 +1,3 @@
-'use strict';
-
 let game = {
   words: [
     'red',

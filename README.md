@@ -21,7 +21,8 @@ style.css
 ```
 この段階で`index.html`を開くと，「クリックでスタート。」と表示されるのみ。
 
-## Javascript準備
+## Javascript
+### 準備
 `game`オブジェクトを作ります。
 ```js
 let game = {
@@ -40,22 +41,24 @@ let game = {
 }
 ```
 
-## ゲームスタート
+### ゲームスタート
 `game`オブジェクトにタイピングゲームをスタートさせる関数を追加します。
 ```js:main.js
-start: function() {
-  game.isPlaying = true;
-  game.startTime = Date.now();
-  game.setWord();
-},
-setWord: function() {
-  game.currentWord = game.words.shift() || '';
-  game.matchedIndex = 0;
-  game.displayWord();
-},
-displayWord: function() {
-  game.mainArea.innerText = '_'.repeat(game.matchedIndex) + game.currentWord.substring(game.matchedIndex);
-},
+game = {
+  ...
+  start: function() {
+    game.isPlaying = true;
+    game.startTime = Date.now();
+    game.setWord();
+  },
+  setWord: function() {
+    game.currentWord = game.words.shift() || '';
+    game.matchedIndex = 0;
+    game.displayWord();
+  },
+  displayWord: function() {
+    game.mainArea.innerText = '_'.repeat(game.matchedIndex) + game.currentWord.substring(game.matchedIndex);
+  },
 }
 ```
 また、画面クリック時に単語を表示するようにイベントハンドラーを設定します。
@@ -67,7 +70,7 @@ document.onclick = () => {
 }
 ```
 
-## 文字を消す
+### 文字を消す
 タイピングが一致していた場合に1文字ずつ消していきます。
 ```js:main.js
 document.onkeydown = (e) => {
@@ -80,7 +83,7 @@ document.onkeydown = (e) => {
 };
 ```
 
-## 単語送り
+### 単語送り
 1単語を全て消すと次の単語を表示するようにします。
 ```js:main.js
 document.onkeydown = (e) => {
@@ -91,12 +94,12 @@ document.onkeydown = (e) => {
 };
 ```
 
-## ゲーム終了
+### ゲーム終了
 全ての単語を消した後にかかった時間を表示します。
 `game`オブジェクトに結果を表示する関数を追加します。
 ```js:main.js
 let game = {
-...
+  ...
   isFinished: function() {
     return game.words.length === 0;
   },
@@ -129,7 +132,7 @@ document.onkeydown = (e) => {
 ## CSS
 タイピングゲームの見た目を整えます。
 フォントなどは自由に変えてください。
-```
+```css
 body {
   text-align: center;
   padding: 50px;

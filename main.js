@@ -17,7 +17,7 @@ let game = {
     game.setWord();
   },
   setWord: function() {
-    game.currentWord = game.words.shift() || '';
+    game.currentWord = sample(game.words) || '';
     game.matchedIndex = 0;
     game.displayWord();
   },
@@ -58,6 +58,10 @@ document.onkeydown = (e) => {
 };
 
 // utils
+function sample(list) {
+  return list.splice(Math.floor(Math.random() * list.length), 1)[0];
+}
+
 function formattedSeconds(ms) {
   return (ms / 1000).toFixed(2);
 }

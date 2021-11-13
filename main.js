@@ -1,45 +1,42 @@
 let game = {
-  words: [
-    'red',
-    'blue',
-    'yellow',
-    'green',
-  ],
-  currentWord: '',
+  words: ["red", "blue", "yellow", "green"],
+  currentWord: "",
   matchedIndex: 0,
   startTime: null,
   isPlaying: false,
-  mainArea: document.getElementById('main'),
-  resultArea: document.getElementById('result'),
-  start: function() {
+  mainArea: document.getElementById("main"),
+  resultArea: document.getElementById("result"),
+  start: function () {
     game.isPlaying = true;
     game.startTime = Date.now();
     game.setWord();
   },
-  setWord: function() {
-    game.currentWord = game.words.shift() || '';
+  setWord: function () {
+    game.currentWord = game.words.shift() || "";
     game.matchedIndex = 0;
     game.displayWord();
   },
-  isFinished: function() {
+  isFinished: function () {
     return game.words.length === 0;
   },
-  displayResult: function() {
+  displayResult: function () {
     const currentTime = Date.now();
     const elapsedTime = formattedSeconds(currentTime - game.startTime);
     game.resultArea.innerText = `${elapsedTime} 秒かかりました。\n もう一度プレイする場合にはブラウザをリロードしてください。`;
     game.isPlaying = false;
   },
-  displayWord: function() {
-    game.mainArea.innerText = '_'.repeat(game.matchedIndex) + game.currentWord.substring(game.matchedIndex);
+  displayWord: function () {
+    game.mainArea.innerText =
+      "_".repeat(game.matchedIndex) +
+      game.currentWord.substring(game.matchedIndex);
   },
-}
+};
 
 document.onclick = () => {
   if (game.isPlaying === false) {
     game.start();
   }
-}
+};
 
 document.onkeydown = (e) => {
   if (e.key !== game.currentWord[game.matchedIndex]) {

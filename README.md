@@ -38,7 +38,7 @@ let game = {
   isPlaying: false,
   mainArea: document.getElementById('main'),
   resultArea: document.getElementById('result'),
-}
+};
 ```
 #### アレンジ
 `words`の中身を好きな英単語に変えてみよう。
@@ -47,7 +47,11 @@ let game = {
 `game`オブジェクトにタイピングゲームをスタートさせる関数を追加します。
 ```js:main.js
 game = {
-  ...
+  words :[
+    ...
+  ],
+  ...,
+  // 追加 -------------------------
   start: function() {
     game.isPlaying = true;
     game.startTime = Date.now();
@@ -61,23 +65,39 @@ game = {
   displayWord: function() {
     game.mainArea.innerText = '_'.repeat(game.matchedIndex) + game.currentWord.substring(game.matchedIndex);
   },
-}
+  // ------------------------------
+};
 ```
 タイピングで消した文字は`_`で表されます。（後で文字を消すコードを実装します。)
 
 また、画面クリック時に単語を表示するようにイベントハンドラーを設定します。
 ```js:main.js
+let game = {
+  ...
+};
+
+// 追加 -------------------------
 document.onclick = () => {
   if (game.isPlaying === false) {
     game.start();
   }
-}
+};
+// ------------------------------
 ```
 
 
 ### 文字を消す
 タイピングが一致していた場合に1文字ずつ消していきます。
 ```js:main.js
+let game = {
+  ...
+};
+
+document.onclick = () => {
+  ...
+};
+
+// 追加 -------------------------
 document.onkeydown = (e) => {
   if (e.key !== game.currentWord[game.matchedIndex]) {
     return;
@@ -86,6 +106,7 @@ document.onkeydown = (e) => {
   game.matchedIndex++;
   game.displayWord();
 };
+// ------------------------------
 ```
 
 #### アレンジ
@@ -95,10 +116,16 @@ document.onkeydown = (e) => {
 1単語を全て消すと次の単語を表示するようにします。
 ```js:main.js
 document.onkeydown = (e) => {
+  if(e.key !== ...) {
+    ...
+  }
+  
   ...
+  // 追加 -------------------------
   if (game.matchedIndex === game.currentWord.length) {
     game.setWord();
   }
+  // -----------------------------
 };
 ```
 
@@ -107,7 +134,11 @@ document.onkeydown = (e) => {
 `game`オブジェクトに結果を表示する関数を追加します。
 ```js:main.js
 let game = {
-  ...
+  words :[
+    ...
+  ],
+  ...,
+  // 追加 -------------------------
   isFinished: function() {
     return game.words.length === 0;
   },
@@ -117,21 +148,39 @@ let game = {
     game.resultArea.innerText = `${elapsedTime} 秒かかりました。\n もう一度プレイする場合にはブラウザをリロードしてください。`;
     game.isPlaying = false;
   },
+  // ------------------------------
 }
 
+document.onclick = () => {
+  ...
+};
+
+document.onkeydown = (e) => {
+  ...
+};
+
+// 追加 -------------------------
 // utils
 function formattedSeconds(ms) {
   return (ms / 1000).toFixed(2);
 }
+// ------------------------------
 ```
 全単語を消した時に結果を表示します。
 ```js:main.js
 document.onkeydown = (e) => {
-...
+  if(e.key !== ...) {
+    ...
+  }
+  
+  ...
+  
   if (game.matchedIndex === game.currentWord.length) {
+    // 追加 --------------------
     if (game.isFinished()) {
       game.displayResult();
     }
+    // ------------------------
     game.setWord();
   }
 };

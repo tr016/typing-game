@@ -38,8 +38,8 @@ document.onclick = () => {
   }
 };
 
-document.onkeydown = (e) => {
-  if (e.key !== game.currentWord[game.matchedIndex]) {
+document.onkeydown = (event) => {
+  if (event.key !== game.currentWord[game.matchedIndex]) {
     return;
   }
 

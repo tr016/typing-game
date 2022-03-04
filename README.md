@@ -98,8 +98,8 @@ document.onclick = () => {
 };
 
 // 追加 -------------------------
-document.onkeydown = (e) => {
-  if (e.key !== game.currentWord[game.matchedIndex]) {
+document.onkeydown = (event) => {
+  if (event.key !== game.currentWord[game.matchedIndex]) {
     return;
   }
 
@@ -115,8 +115,8 @@ document.onkeydown = (e) => {
 ### 単語送り
 1単語を全て消すと次の単語を表示するようにします。
 ```js:main.js
-document.onkeydown = (e) => {
-  if(e.key !== ...) {
+document.onkeydown = (event) => {
+  if(event.key !== ...) {
     ...
   }
   
@@ -155,7 +155,7 @@ document.onclick = () => {
   ...
 };
 
-document.onkeydown = (e) => {
+document.onkeydown = (event) => {
   ...
 };
 
@@ -168,8 +168,8 @@ function formattedSeconds(ms) {
 ```
 全単語を消した時に結果を表示します。
 ```js:main.js
-document.onkeydown = (e) => {
-  if(e.key !== ...) {
+document.onkeydown = (event) => {
+  if(event.key !== ...) {
     ...
   }
   
